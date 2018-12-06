@@ -4,7 +4,7 @@
   <ClientId>{ac9c27a4-5461-4487-96e2-5c2fd1073cdc}</ClientId>
   <DisplayName>AutoSave</DisplayName>
   <Description>AutoSave</Description>
-  <Assembly>AutoSave-Standalone.dll</Assembly>
+  <Assembly>AutoSave.dll</Assembly>
   <LoadOnStartUp>1</LoadOnStartUp>
   <UserUnloadable>1</UserUnloadable>
   <Hidden>0</Hidden>

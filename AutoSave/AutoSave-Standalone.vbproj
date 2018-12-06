@@ -70,6 +70,9 @@
   <PropertyGroup>
     <RootNamespace>AutoSave</RootNamespace>
   </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyName>AutoSave</AssemblyName>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AddinNETFramework.AdWebServicesWrapper">
       <HintPath>C:\Program Files\Autodesk\Inventor 2019\Bin\AddinNETFramework.AdWebServicesWrapper.dll</HintPath>
@@ -132,7 +135,7 @@
     <None Include="AutoSave.X.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Autodesk.AutoSaveSA.Inventor.addin" />
+    <None Include="Autodesk.AutoSave.Inventor.addin" />
   </ItemGroup>
   <ItemGroup>
     <None Include="My Project\Settings.settings">
@@ -215,9 +218,9 @@
     </PreBuildEvent>
     <PostBuildEvent>call "%25VS140COMNTOOLS%25vsvars32"
 		mt.exe -manifest "$(ProjectDir)AutoSave.X.manifest" -outputresource:"$(TargetPath)";#2
-		XCopy "$(Targetdir)AutoSave-STANDALONE.dll" "%25AppData%25\Autodesk\ApplicationPlugins\$(TargetName)\" /Y /R
+		XCopy "$(Targetdir)AutoSave.dll" "%25AppData%25\Autodesk\ApplicationPlugins\$(TargetName)\" /Y /R
                            	XCopy "$(Targetdir)RestSharp.dll" "%25AppData%25\Autodesk\ApplicationPlugins\$(TargetName)\" /Y /R
-		XCopy "$(ProjectDir)Autodesk.AutoSaveSA.Inventor.addin" "%25AppData%25\Autodesk\ApplicationPlugins\$(TargetName)\" /Y /R
+		XCopy "$(ProjectDir)Autodesk.AutoSave.Inventor.addin" "%25AppData%25\Autodesk\ApplicationPlugins\$(TargetName)\" /Y /R
 	</PostBuildEvent>
   </PropertyGroup>
 </Project>
