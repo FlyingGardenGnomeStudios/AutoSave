@@ -14,12 +14,12 @@ Imports System.Runtime.InteropServices
 
 Namespace AutoSave
     <ProgIdAttribute("AutoSave.StandardAddInServer"),
-    GuidAttribute("a97cd3d3-b10e-42ce-99c4-07a5a6310424")>
+    GuidAttribute("ac9c27a4-5461-4487-96e2-5c2fd1073cdc")>
     Public Class StandardAddInServer
         Implements Inventor.ApplicationAddInServer
         Dim WithEvents m_UIEvents2 As UserInputEvents
         Private WithEvents m_uiEvents As UserInterfaceEvents
-        Private WithEvents m_AutoSaveButton As ButtonDefinition
+        Private WithEvents m_AutoSaveSAButton As ButtonDefinition
         Dim WithEvents m_AppEvents As ApplicationEvents
         Dim bkgAutoSave As System.Threading.Thread
         Dim _invApp As Inventor.Application
@@ -39,27 +39,31 @@ Namespace AutoSave
         ' the first time. However, with the introduction of the ribbon this argument is always true.
         Public Sub Activate(ByVal addInSiteObject As Inventor.ApplicationAddInSite, ByVal firstTime As Boolean) Implements Inventor.ApplicationAddInServer.Activate
             ' Initialize AddIn members.
-            If IsFile(IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData), "Autodesk\ApplicationPlugins"), "AutoSave-Standalone.dll") = True Then
-                MsgBox("It appears as though the standalone version of Autosave is installed" & vbNewLine &
+
+            If IsFile(IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData), "Autodesk\ApplicationPlugins"), "AutoSave.dll") = True Then
+                'If IO.File.Exists(IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData), "Autodesk\ApplicationPlugins\FlyingGarden_AutoSave.bundle\Contents\AutoSave.dll")) Then
+                MsgBox("It appears as though the subscription version of Autosave is installed" & vbNewLine &
                        "In order to stop save conflicts, please uninstal one of the AutoSave versions." & vbNewLine &
-                       "The subscription version will not be loaded.")
+                       "The standalone version will not be loaded.")
                 Exit Sub
             End If
             g_inventorApplication = addInSiteObject.Application
             ' Connect to the user-interface events to handle a ribbon reset.
             m_uiEvents = g_inventorApplication.UserInterfaceManager.UserInterfaceEvents
             m_UIEvents2 = g_inventorApplication.CommandManager.UserInputEvents
-            Dim largeIcon As stdole.IPictureDisp = PictureDispConverter.ToIPictureDisp(My.Resources.AutoSave_32)
-            Dim smallIcon As stdole.IPictureDisp = PictureDispConverter.ToIPictureDisp(My.Resources.AutoSave_16)
+            Dim largeIcon As stdole.IPictureDisp = PictureDispConverter.ToIPictureDisp(My.Resources.AutoSave_Icon_Perm_32)
+            Dim smallIcon As stdole.IPictureDisp = PictureDispConverter.ToIPictureDisp(My.Resources.AutoSave_Icon_Perm_16)
             Dim controlDefs As Inventor.ControlDefinitions = g_inventorApplication.CommandManager.ControlDefinitions
             ' ActivationCheck()
-            m_AutoSaveButton = controlDefs.AddButtonDefinition("Settings", "UIAutoSave", CommandTypesEnum.kShapeEditCmdType, AddInClientID,, "Change options for AutoSave", smallIcon, largeIcon, ButtonDisplayEnum.kDisplayTextInLearningMode)
+
+            m_AutoSaveSAButton = controlDefs.AddButtonDefinition("Settings", "UIAutoSaveSA", CommandTypesEnum.kShapeEditCmdType, AddInClientID,, "Change options for AutoSave", smallIcon, largeIcon, ButtonDisplayEnum.kDisplayTextInLearningMode)
             m_AppEvents = g_inventorApplication.ApplicationEvents
             ' Add to the user interface, if it's the first time.
             If firstTime Then
                 AddToUserInterface()
             End If
         End Sub
+
         Function IsFile(ByVal DName As String, ByVal FName As String) As Boolean
             For Each foundFile As String In My.Computer.FileSystem.GetFiles(DName, FileIO.SearchOption.SearchAllSubDirectories, FName)
                 Return True
@@ -109,14 +113,14 @@ Namespace AutoSave
                 mgr.GetLoginUserName(username)
                 'replace your App id here...
                 'contact appsubmissions@autodesk.com for the App Id
-                Dim appId As String = "3908021420381157341"
+                Dim appId As String = "2011674918500320289"
                 Dim isValid As Boolean = Entitlement(appId, userId)
                 Dim Reg As Object
                 Try
-                    Reg = My.Computer.Registry.CurrentUser.OpenSubKey("Software\Autodesk\Inventor\Current Version\AutoSave", True).GetValue("Arb1")
+                    Reg = My.Computer.Registry.CurrentUser.OpenSubKey("Software\Autodesk\Inventor\Current Version\AutoSaveSA", True).GetValue("Arb1")
                 Catch ex As Exception
-                    My.Computer.Registry.CurrentUser.CreateSubKey("Software\Autodesk\Inventor\Current Version\AutoSave")
-                    Reg = My.Computer.Registry.CurrentUser.OpenSubKey("Software\Autodesk\Inventor\Current Version\AutoSave", True)
+                    My.Computer.Registry.CurrentUser.CreateSubKey("Software\Autodesk\Inventor\Current Version\AutoSaveSA")
+                    Reg = My.Computer.Registry.CurrentUser.OpenSubKey("Software\Autodesk\Inventor\Current Version\AutoSaveSA", True)
                     Reg.SetValue("Arb1", (DateTime.UtcNow - New DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds, RegistryValueKind.DWord) ' date
                     Reg.SetValue("Arb2", userId, RegistryValueKind.String) 'UserID
                     Reg.SetValue("Arb3", appId, RegistryValueKind.String) ' Appid
@@ -128,18 +132,18 @@ Namespace AutoSave
                     Try
                         Dim uTime As Integer
                         uTime = (DateTime.UtcNow.AddDays(15) - New DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds
-                        My.Computer.Registry.CurrentUser.SetValue("Software\Autodesk\Inventor\Current Version\AutoSave", uTime, RegistryValueKind.DWord)
+                        My.Computer.Registry.CurrentUser.SetValue("Software\Autodesk\Inventor\Current Version\AutoSaveSA", uTime, RegistryValueKind.DWord)
                         Fail = False
                     Catch ex As Exception
                     End Try
                 ElseIf isValid = False Then
-                    Dim FDay As DateTime = ConvertFromUnixTimestamp(My.Computer.Registry.CurrentUser.OpenSubKey("Software\Autodesk\Inventor\Current Version\AutoSave", True).GetValue("Arb1"))
+                    Dim FDay As DateTime = ConvertFromUnixTimestamp(My.Computer.Registry.CurrentUser.OpenSubKey("Software\Autodesk\Inventor\Current Version\AutoSaveSA", True).GetValue("Arb1"))
                     If userId = "" Then
                         LicenseError = "No user logged in" & vbNewLine &
                                         "Please sign in to Autodesk 360 to use AutoSave."
                     ElseIf DateTime.Today < FDay AndAlso FDay > DateTime.Today.AddDays(16) AndAlso
-                    My.Computer.Registry.CurrentUser.OpenSubKey("Software\Autodesk\Inventor\Current Version\AutoSave", True).GetValue("Arb2") = userId AndAlso
-                    My.Computer.Registry.CurrentUser.OpenSubKey("Software\Autodesk\Inventor\Current Version\AutoSave", True).GetValue("Arb3") = appId Then
+                    My.Computer.Registry.CurrentUser.OpenSubKey("Software\Autodesk\Inventor\Current Version\AutoSaveSA", True).GetValue("Arb2") = userId AndAlso
+                    My.Computer.Registry.CurrentUser.OpenSubKey("Software\Autodesk\Inventor\Current Version\AutoSaveSA", True).GetValue("Arb3") = appId Then
                         Dim days As Integer = FDay.Subtract(Today).Days
                         LicenseError = "License-check failed" & vbNewLine &
                                         "Confirm you have access to the internet and retry." & vbNewLine &
@@ -196,9 +200,9 @@ Namespace AutoSave
                 Dim GetStartedRibbon As Ribbon = g_inventorApplication.UserInterfaceManager.Ribbons.Item(Ribbon.InternalName)
                 Dim GetStarted As RibbonTab = GetStartedRibbon.RibbonTabs.Item("id_GetStarted")
                 '' Create a new panel.
-                Dim AutoSave As RibbonPanel = GetStarted.RibbonPanels.Add("AutoSave", "AutoSave", AddInClientID)
+                Dim AutoSave As RibbonPanel = GetStarted.RibbonPanels.Add("AutoSave", "AutoSaveSA", AddInClientID)
                 '' Add a button.
-                AutoSave.CommandControls.AddButton(m_AutoSaveButton, True)
+                AutoSave.CommandControls.AddButton(m_AutoSaveSAButton, True)
             Next
             bkgAutoSave = New System.Threading.Thread(AddressOf runAutoSave)
             bkgAutoSave.Start()
@@ -209,7 +213,7 @@ Namespace AutoSave
             AddToUserInterface()
         End Sub
         ' Sample handler for the button.
-        Private Sub m_AutoSaveButton_OnExecute(Context As NameValueMap) Handles m_AutoSaveButton.OnExecute
+        Private Sub m_AutoSaveSAButton_OnExecute(Context As NameValueMap) Handles m_AutoSaveSAButton.OnExecute
             ActivationCheck()
 
             If Fail = False Then
@@ -239,14 +243,14 @@ Namespace AutoSave
                                 End While
                                 Dim processes As Process() = Process.GetProcessesByName("Inventor")
                                 For Each process As Process In processes
-                                    Dim Test As New Test
-                                    Dim windows As IDictionary(Of IntPtr, String) = Test.GetOpenWindowsFromPID(process.Id)
+                                    Dim WindowCount As New WindowCount
+                                    Dim windows As IDictionary(Of IntPtr, String) = WindowCount.GetOpenWindowsFromPID(process.Id)
                                     Do Until windows.Count = 1
                                         If windows.Count > 1 Then
                                             Threading.Thread.Sleep(1000)
                                         End If
                                         windows.Clear()
-                                        windows = Test.GetOpenWindowsFromPID(process.Id)
+                                        windows = WindowCount.GetOpenWindowsFromPID(process.Id)
                                     Loop
                                 Next
                                 SaveFiles()
@@ -652,7 +656,7 @@ Public Module Globals
     End Class
 
 #End Region
-    Public Class Test
+    Public Class WindowCount
 
         <DllImport("USER32.DLL")>
         Private Shared Function GetShellWindow() As IntPtr

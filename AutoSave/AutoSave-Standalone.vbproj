@@ -72,16 +72,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AddinNETFramework.AdWebServicesWrapper">
-      <HintPath>K:\Autodesk\Inventor 2017\Bin\AddinNETFramework.AdWebServicesWrapper.dll</HintPath>
+      <HintPath>C:\Program Files\Autodesk\Inventor 2019\Bin\AddinNETFramework.AdWebServicesWrapper.dll</HintPath>
     </Reference>
     <Reference Include="autodesk.inventor.interop, Version=21.0.0.0, Culture=neutral, PublicKeyToken=d84147f8b4276564, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>False</EmbedInteropTypes>
       <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\Autodesk.Inventor.Interop\v4.0_21.0.0.0__d84147f8b4276564\autodesk.inventor.interop.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp, Version=106.1.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\RestSharp.106.1.0\lib\net452\RestSharp.dll</HintPath>
+    <Reference Include="RestSharp, Version=106.5.4.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.5.4\lib\net452\RestSharp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -132,7 +132,7 @@
     <None Include="AutoSave.X.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Autodesk.AutoSave.Inventor.addin" />
+    <None Include="Autodesk.AutoSaveSA.Inventor.addin" />
   </ItemGroup>
   <ItemGroup>
     <None Include="My Project\Settings.settings">
@@ -200,15 +200,24 @@
       <DependentUpon>Settings.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AutoSave Icon Perm 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AutoSave Icon Perm 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AutoSave Icon Perm.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
     <PostBuildEvent>call "%25VS140COMNTOOLS%25vsvars32"
 		mt.exe -manifest "$(ProjectDir)AutoSave.X.manifest" -outputresource:"$(TargetPath)";#2
-		XCopy "$(Targetdir)AutoSave.dll" "%25AppData%25\Autodesk\ApplicationPlugins\$(TargetName)\" /Y /R
+		XCopy "$(Targetdir)AutoSave-STANDALONE.dll" "%25AppData%25\Autodesk\ApplicationPlugins\$(TargetName)\" /Y /R
                            	XCopy "$(Targetdir)RestSharp.dll" "%25AppData%25\Autodesk\ApplicationPlugins\$(TargetName)\" /Y /R
-		XCopy "$(ProjectDir)Autodesk.AutoSave.Inventor.addin" "%25AppData%25\Autodesk\ApplicationPlugins\$(TargetName)\" /Y /R
+		XCopy "$(ProjectDir)Autodesk.AutoSaveSA.Inventor.addin" "%25AppData%25\Autodesk\ApplicationPlugins\$(TargetName)\" /Y /R
 	</PostBuildEvent>
   </PropertyGroup>
 </Project>

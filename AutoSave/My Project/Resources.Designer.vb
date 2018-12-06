@@ -91,18 +91,35 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property AutoSave_Icon_Perm_16() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("AutoSave_Icon_Perm_16", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property AutoSave_Icon_Perm_32() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("AutoSave_Icon_Perm_32", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Version 1.6.1
         '''	Added intermediate dirty flag to insulate the standard flag from improper overwrites
+        '''	Moved writing of save data to non-active document (previous method may have caused crashes)
+        '''	Added extra check to confirm idle state before initiating autosave 
         '''Version 1.6
         '''	Corrected subscription issues - instituted 15 day grace period
         '''Version 1.5.2
         '''	Forced update of &quot;Part Name&quot; iProperty after autosave. Some people were having the autosave part number display on their active drawing.
-        '''	Added log reset button
-        '''Version 1.5.1
-        '''	Fixed bug which skipped saving active drawing documents
-        '''Version 1.5
-        '''	Some backups incorrectly deleting during Inventor load
-        '''	Fixed sav [rest of string was truncated]&quot;;.
+        '''	Added log res [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property Changelog() As String
             Get
