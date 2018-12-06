@@ -7,5 +7,4 @@
   <clrClass clsid="{a97cd3d3-b10e-42ce-99c4-07a5a6310424}" progid="AutoSave.StandardAddInServer" threadingModel="Both" name="AutoSave.AutoSave.StandardAddInServer" runtimeVersion=""></clrClass>
 
   <file name="AutoSave.dll" hashalg="SHA1"></file>
-
 </assembly>
