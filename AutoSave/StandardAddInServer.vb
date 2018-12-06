@@ -14,12 +14,12 @@ Imports System.Runtime.InteropServices
 
 Namespace AutoSave
     <ProgIdAttribute("AutoSave.StandardAddInServer"),
-    GuidAttribute("ac9c27a4-5461-4487-96e2-5c2fd1073cdc")>
+    GuidAttribute("7a90a87f-19b4-4777-b843-2e2e8283e16b")>
     Public Class StandardAddInServer
         Implements Inventor.ApplicationAddInServer
         Dim WithEvents m_UIEvents2 As UserInputEvents
         Private WithEvents m_uiEvents As UserInterfaceEvents
-        Private WithEvents m_AutoSaveSAButton As ButtonDefinition
+        Private WithEvents m_AutoSaveButton As ButtonDefinition
         Dim WithEvents m_AppEvents As ApplicationEvents
         Dim bkgAutoSave As System.Threading.Thread
         Dim _invApp As Inventor.Application
@@ -39,14 +39,14 @@ Namespace AutoSave
         ' the first time. However, with the introduction of the ribbon this argument is always true.
         Public Sub Activate(ByVal addInSiteObject As Inventor.ApplicationAddInSite, ByVal firstTime As Boolean) Implements Inventor.ApplicationAddInServer.Activate
             ' Initialize AddIn members.
-
             If IsFile(IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData), "Autodesk\ApplicationPlugins"), "AutoSave-Standalone.dll") = True Then
                 'If IO.File.Exists(IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData), "Autodesk\ApplicationPlugins\FlyingGarden_AutoSave.bundle\Contents\AutoSave.dll")) Then
                 MsgBox("It appears as though the perpetual version of Autosave is installed" & vbNewLine &
                        "In order to stop save conflicts, please uninstal one of the AutoSave versions." & vbNewLine &
-                       "The perpetual version will not be loaded.")
+                       "The subscription version will not be loaded.")
                 Exit Sub
             End If
+
             g_inventorApplication = addInSiteObject.Application
             ' Connect to the user-interface events to handle a ribbon reset.
             m_uiEvents = g_inventorApplication.UserInterfaceManager.UserInterfaceEvents
@@ -55,8 +55,7 @@ Namespace AutoSave
             Dim smallIcon As stdole.IPictureDisp = PictureDispConverter.ToIPictureDisp(My.Resources.AutoSave_16)
             Dim controlDefs As Inventor.ControlDefinitions = g_inventorApplication.CommandManager.ControlDefinitions
             ' ActivationCheck()
-
-            m_AutoSaveSAButton = controlDefs.AddButtonDefinition("Settings", "UIAutoSaveSA", CommandTypesEnum.kShapeEditCmdType, AddInClientID,, "Change options for AutoSave", smallIcon, largeIcon, ButtonDisplayEnum.kDisplayTextInLearningMode)
+            m_AutoSaveButton = controlDefs.AddButtonDefinition("Settings", "UIAutoSave", CommandTypesEnum.kShapeEditCmdType, AddInClientID,, "Change options for AutoSave", smallIcon, largeIcon, ButtonDisplayEnum.kDisplayTextInLearningMode)
             m_AppEvents = g_inventorApplication.ApplicationEvents
             ' Add to the user interface, if it's the first time.
             If firstTime Then
@@ -117,10 +116,10 @@ Namespace AutoSave
                 Dim isValid As Boolean = Entitlement(appId, userId)
                 Dim Reg As Object
                 Try
-                    Reg = My.Computer.Registry.CurrentUser.OpenSubKey("Software\Autodesk\Inventor\Current Version\AutoSaveSA", True).GetValue("Arb1")
+                    Reg = My.Computer.Registry.CurrentUser.OpenSubKey("Software\Autodesk\Inventor\Current Version\AutoSave", True).GetValue("Arb1")
                 Catch ex As Exception
-                    My.Computer.Registry.CurrentUser.CreateSubKey("Software\Autodesk\Inventor\Current Version\AutoSaveSA")
-                    Reg = My.Computer.Registry.CurrentUser.OpenSubKey("Software\Autodesk\Inventor\Current Version\AutoSaveSA", True)
+                    My.Computer.Registry.CurrentUser.CreateSubKey("Software\Autodesk\Inventor\Current Version\AutoSave")
+                    Reg = My.Computer.Registry.CurrentUser.OpenSubKey("Software\Autodesk\Inventor\Current Version\AutoSave", True)
                     Reg.SetValue("Arb1", (DateTime.UtcNow - New DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds, RegistryValueKind.DWord) ' date
                     Reg.SetValue("Arb2", userId, RegistryValueKind.String) 'UserID
                     Reg.SetValue("Arb3", appId, RegistryValueKind.String) ' Appid
@@ -132,18 +131,18 @@ Namespace AutoSave
                     Try
                         Dim uTime As Integer
                         uTime = (DateTime.UtcNow.AddDays(15) - New DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds
-                        My.Computer.Registry.CurrentUser.SetValue("Software\Autodesk\Inventor\Current Version\AutoSaveSA", uTime, RegistryValueKind.DWord)
+                        My.Computer.Registry.CurrentUser.SetValue("Software\Autodesk\Inventor\Current Version\AutoSave", uTime, RegistryValueKind.DWord)
                         Fail = False
                     Catch ex As Exception
                     End Try
                 ElseIf isValid = False Then
-                    Dim FDay As DateTime = ConvertFromUnixTimestamp(My.Computer.Registry.CurrentUser.OpenSubKey("Software\Autodesk\Inventor\Current Version\AutoSaveSA", True).GetValue("Arb1"))
+                    Dim FDay As DateTime = ConvertFromUnixTimestamp(My.Computer.Registry.CurrentUser.OpenSubKey("Software\Autodesk\Inventor\Current Version\AutoSave", True).GetValue("Arb1"))
                     If userId = "" Then
                         LicenseError = "No user logged in" & vbNewLine &
                                         "Please sign in to Autodesk 360 to use AutoSave."
                     ElseIf DateTime.Today < FDay AndAlso FDay > DateTime.Today.AddDays(16) AndAlso
-                    My.Computer.Registry.CurrentUser.OpenSubKey("Software\Autodesk\Inventor\Current Version\AutoSaveSA", True).GetValue("Arb2") = userId AndAlso
-                    My.Computer.Registry.CurrentUser.OpenSubKey("Software\Autodesk\Inventor\Current Version\AutoSaveSA", True).GetValue("Arb3") = appId Then
+                    My.Computer.Registry.CurrentUser.OpenSubKey("Software\Autodesk\Inventor\Current Version\AutoSave", True).GetValue("Arb2") = userId AndAlso
+                    My.Computer.Registry.CurrentUser.OpenSubKey("Software\Autodesk\Inventor\Current Version\AutoSave", True).GetValue("Arb3") = appId Then
                         Dim days As Integer = FDay.Subtract(Today).Days
                         LicenseError = "License-check failed" & vbNewLine &
                                         "Confirm you have access to the internet and retry." & vbNewLine &
@@ -200,9 +199,9 @@ Namespace AutoSave
                 Dim GetStartedRibbon As Ribbon = g_inventorApplication.UserInterfaceManager.Ribbons.Item(Ribbon.InternalName)
                 Dim GetStarted As RibbonTab = GetStartedRibbon.RibbonTabs.Item("id_GetStarted")
                 '' Create a new panel.
-                Dim AutoSave As RibbonPanel = GetStarted.RibbonPanels.Add("AutoSave", "AutoSaveSA", AddInClientID)
+                Dim AutoSave As RibbonPanel = GetStarted.RibbonPanels.Add("AutoSave", "AutoSave", AddInClientID)
                 '' Add a button.
-                AutoSave.CommandControls.AddButton(m_AutoSaveSAButton, True)
+                AutoSave.CommandControls.AddButton(m_AutoSaveButton, True)
             Next
             bkgAutoSave = New System.Threading.Thread(AddressOf runAutoSave)
             bkgAutoSave.Start()
@@ -213,7 +212,7 @@ Namespace AutoSave
             AddToUserInterface()
         End Sub
         ' Sample handler for the button.
-        Private Sub m_AutoSaveSAButton_OnExecute(Context As NameValueMap) Handles m_AutoSaveSAButton.OnExecute
+        Private Sub m_AutoSaveButton_OnExecute(Context As NameValueMap) Handles m_AutoSaveButton.OnExecute
             ActivationCheck()
 
             If Fail = False Then
