@@ -5,7 +5,6 @@ Imports System.Runtime.InteropServices
 ' General Information about an assembly is controlled through the following 
 ' set of attributes. Change these attribute values to modify the information
 ' associated with an assembly.
-
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("AutoSave")>
@@ -16,7 +15,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTrademark("")>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("7a90a87f-19b4-4777-b843-2e2e8283e16b")>
+<Assembly: Guid("a97cd3d3-b10e-42ce-99c4-07a5a6310424")>
 
 ' Version information for an assembly consists of the following four values:
 '

@@ -9,12 +9,10 @@ Imports System.Text
 Imports RestSharp
 Imports System.Net
 Imports RestSharp.Deserializers
-Imports Scripting
 Imports System.Runtime.InteropServices
-
 Namespace AutoSave
     <ProgIdAttribute("AutoSave.StandardAddInServer"),
-    GuidAttribute("7a90a87f-19b4-4777-b843-2e2e8283e16b")>
+    GuidAttribute("a97cd3d3-b10e-42ce-99c4-07a5a6310424")>
     Public Class StandardAddInServer
         Implements Inventor.ApplicationAddInServer
         Dim WithEvents m_UIEvents2 As UserInputEvents
@@ -32,8 +30,8 @@ Namespace AutoSave
         Dim Fail As Boolean = True
         Dim LicenseError As String = ""
 
-#Region "ApplicationAddInServer Members"
 
+#Region "ApplicationAddInServer Members"
         ' This method is called by Inventor when it loads the AddIn. The AddInSiteObject provides access  
         ' to the Inventor Application object. The FirstTime flag indicates if the AddIn is loaded for
         ' the first time. However, with the introduction of the ribbon this argument is always true.
@@ -187,8 +185,6 @@ Namespace AutoSave
             Return isValid
         End Function
 #End Region
-        Private fso As New FileSystemObject
-
 #Region "User interface definition"
         ' Sub where the user-interface creation is done.  This is called when
         ' the add-in loaded and also if the user interface is reset.
