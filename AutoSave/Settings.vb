@@ -162,7 +162,7 @@ Public Class Settings
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         txtLog.Clear()
         For Each Line As String In File.ReadLines(IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.Temp, "log.txt"))
-            txtLog.AppendText(Line)
+            txtLog.AppendText(Line & Environment.NewLine)
         Next
         If Button1.Text = "V" Then
             Me.Height = 510

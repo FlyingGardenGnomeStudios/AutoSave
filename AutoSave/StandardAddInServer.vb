@@ -44,7 +44,6 @@ Namespace AutoSave
                        "The subscription version will not be loaded.")
                 Exit Sub
             End If
-
             g_inventorApplication = addInSiteObject.Application
             ' Connect to the user-interface events to handle a ribbon reset.
             m_uiEvents = g_inventorApplication.UserInterfaceManager.UserInterfaceEvents
@@ -111,7 +110,7 @@ Namespace AutoSave
                 'replace your App id here...
                 'contact appsubmissions@autodesk.com for the App Id
                 Dim appId As String = "2011674918500320289"
-                Dim isValid As Boolean = Entitlement(appId, userId)
+                Dim isValid As Boolean = Entitlement(appId, "WHRYLVGAM7Q8")
                 Dim Reg As Object
                 Try
                     Reg = My.Computer.Registry.CurrentUser.OpenSubKey("Software\Autodesk\Inventor\Current Version\AutoSave", True).GetValue("Arb1")
@@ -261,43 +260,90 @@ Namespace AutoSave
         End Sub
 
         Private Sub SaveFiles()
+            Log.Log("Save sequence initialized")
+            Dim InEdit As New List(Of Inventor.Document)
+            Dim RetryCount As Integer = 0
             Dim Proj As Integer = My.Settings.Projects
             If My.Settings.KeepOlderThan = True And My.Settings.Cleanup = True Then
                 Cleanup(g_inventorApplication.ActiveDocument)
             Else
                 Select Case Proj
                     Case 0
-                        DirtyWork(g_inventorApplication.ActiveDocument)
+                        DirtyWork(g_inventorApplication.ActiveDocument, InEdit)
                     Case 1
                         For Each Document As Document In g_inventorApplication.Documents.VisibleDocuments
-                            DirtyWork(Document)
+                            DirtyWork(Document, InEdit)
                         Next
                     Case 2
                         For Each Document As Document In g_inventorApplication.Documents
-                            DirtyWork(Document)
+                            DirtyWork(Document, InEdit)
                         Next
                 End Select
+runSave:
+                If InEdit.Count > 0 OrElse RetryCount >= (My.Settings.Interval / 60) - 1 Then
+                    Threading.Thread.Sleep(60000)
+                    Log.Log("Attempting save of skipped files" & vbNewLine & "Retry Count: " & RetryCount)
+                    Select Case Proj
+                        Case 0
+                            DirtyWork(g_inventorApplication.ActiveDocument, InEdit)
+                        Case 1
+                            For Each Document As Document In InEdit
+                                DirtyWork(Document, InEdit)
+                            Next
+                        Case 2
+                            For Each Document As Document In InEdit
+                                DirtyWork(Document, InEdit)
+                            Next
+                    End Select
+                    RetryCount += 1
+                    GoTo runSave
+
+                    If RetryCount = My.Settings.Interval / 60 Then
+                        Dim Unsaved As String = ""
+                        For X = 0 To InEdit.Count
+                            Unsaved = Unsaved & InEdit.Item(X).DisplayName & vbNewLine
+                        Next
+                        Log.Log("The following files were unable to be saved: " & vbNewLine & Unsaved)
+                        InEdit.Clear()
+                    End If
+                End If
             End If
+
         End Sub
 
-        Private Sub DirtyWork(oDoc As Inventor.Document)
+        Private Sub DirtyWork(oDoc As Inventor.Document, InEdit As List(Of Inventor.Document))
             If Not ChangeReport.Contains(oDoc.FullFileName) Then
                 Log.Log(oDoc.DisplayName & " Skipped save - No changes since last save")
+                If InEdit.Contains(oDoc) Then
+                    InEdit.Remove(oDoc)
+                End If
                 Exit Sub
             End If
-            If oDoc.DocumentType = DocumentTypeEnum.kAssemblyDocumentObject Then
-                Dim oAssDoc As AssemblyDocument = g_inventorApplication.ActiveDocument
-                If Not oAssDoc.ComponentDefinition.ActiveOccurrence Is Nothing Then
-                    Log.Log("Skipped saving " & oAssDoc.DisplayName & vbNewLine & "Currently being edited by user.")
-                    Exit Sub
+            Try
+                If oDoc.DocumentType = DocumentTypeEnum.kAssemblyDocumentObject Then
+                    Dim oAssDoc As AssemblyDocument = g_inventorApplication.ActiveDocument
+                    If Not oAssDoc.ComponentDefinition.ActiveOccurrence Is Nothing Then
+                        Log.Log("Skipped saving " & oAssDoc.DisplayName & vbNewLine & "Currently being edited by user.")
+                        If Not InEdit.Contains(oDoc) Then
+                            InEdit.Add(oDoc)
+                        End If
+                        Exit Sub
+                    End If
+                ElseIf oDoc.DocumentType = DocumentTypeEnum.kPartDocumentObject Then
+                    Dim oPartDoc = g_inventorApplication.ActiveDocument
+                    If Not oPartDoc.ActivatedObject Is Nothing Then
+                        Log.Log("Skipped saving " & oPartDoc.DisplayName & vbNewLine & "Currently being edited by user.")
+                        If Not InEdit.Contains(oPartDoc) Then
+                            InEdit.Add(oPartDoc)
+                        End If
+                        Exit Sub
+                    End If
                 End If
-            ElseIf oDoc.DocumentType = DocumentTypeEnum.kPartDocumentObject Then
-                Dim oPartDoc = g_inventorApplication.ActiveDocument
-                If Not oPartDoc.ActivatedObject Is Nothing Then
-                    Log.Log("Skipped saving " & oPartDoc.DisplayName & vbNewLine & "Currently being edited by user.")
-                    Exit Sub
-                End If
-            End If
+            Catch ex As Exception
+                Log.Log("Autosave encountered an error while trying to save " & oDoc.DisplayName & vbNewLine &
+                    "Could not determine the document type" & vbNewLine & ex.Message)
+                Exit Sub
+            End Try
             If oDoc.FullFileName = "" Then
                 Dim ans As MsgBoxResult
                 ans = MsgBox("The document " & oDoc.DisplayName & " has not yet been saved." _
@@ -330,7 +376,11 @@ Namespace AutoSave
                         Try
                             oDoc.SaveAs(SaveName, True)
                             Write_Save_Data(oDoc.DisplayName, SaveName, oDoc.FullDocumentName)
+                            If InEdit.Contains(oDoc) Then
+                                InEdit.Remove(oDoc)
+                            End If
                         Catch ex As Exception
+                            InEdit.Add(oDoc)
                             Log.Log("Error encountered while saving " & oDoc.DisplayName & vbNewLine & ex.Message)
                         End Try
                     Else
@@ -343,7 +393,11 @@ Namespace AutoSave
                         Try
                             oDoc.SaveAs(SaveName, True)
                             Write_Save_Data(oDoc.DisplayName, SaveName, oDoc.FullDocumentName)
+                            If InEdit.Contains(oDoc) Then
+                                InEdit.Remove(oDoc)
+                            End If
                         Catch ex As Exception
+                            InEdit.Add(oDoc)
                             Log.Log("Error encountered while saving " & oDoc.DisplayName & vbNewLine & ex.Message)
                         End Try
                     End If
@@ -370,7 +424,8 @@ Namespace AutoSave
                         Next
                     End If
                 Catch ex As Exception
-                    Log.Log("Error encountered while saving: " & ex.Message)
+                    InEdit.Add(oDoc)
+                    Log.Log("Error encountered while saving: " & oDoc.DisplayName & vbNewLine & ex.Message)
                 Finally
                     g_inventorApplication.SilentOperation = False
                     SkipSave = False

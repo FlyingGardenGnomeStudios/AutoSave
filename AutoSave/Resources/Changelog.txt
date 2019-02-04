@@ -1,4 +1,7 @@
-﻿Version 1.6.1
+﻿Version 1.6.2
+	Added retry process for failed save
+	Minor debugging
+Version 1.6.1
 	Added intermediate dirty flag to insulate the standard flag from improper overwrites
 	Moved writing of save data to non-active document (previous method may have caused crashes)
 	Added extra check to confirm idle state before initiating autosave 
