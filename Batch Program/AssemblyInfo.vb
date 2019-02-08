@@ -7,15 +7,15 @@ Imports System.Runtime.InteropServices
 ' associated with an assembly.
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("AutoSave")>
-<Assembly: AssemblyDescription("AutoSave")>
+<Assembly: AssemblyTitle("Batch Program")>
+<Assembly: AssemblyDescription("Batch Program")>
 <Assembly: AssemblyCompany("Autodesk, Inc.")>
 <Assembly: AssemblyProduct("Autodesk Inventor")>
 <Assembly: AssemblyCopyright("Copyright ?2012 Autodesk, Inc.")>
 <Assembly: AssemblyTrademark("")>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("a97cd3d3-b10e-42ce-99c4-07a5a6310424")>
+<Assembly: Guid("28c77d41-4c93-4cdd-aabd-3d200d491d8f")>
 
 ' Version information for an assembly consists of the following four values:
 '
