@@ -1,10 +1,10 @@
 <Addin Type="Standard">
   <!--Created for Autodesk Inventor Version 21.0-->
-  <ClassId>{28c77d41-4c93-4cdd-aabd-3d200d491d8f}</ClassId>
-  <ClientId>{28c77d41-4c93-4cdd-aabd-3d200d491d8f}</ClientId>
-  <DisplayName>Batch Program</DisplayName>
-  <Description>Batch Program</Description>
-  <Assembly>Batch Program.dll</Assembly>
+  <ClassId>{a97cd3d3-b10e-42ce-99c4-07a5a6310424}</ClassId>
+  <ClientId>{a97cd3d3-b10e-42ce-99c4-07a5a6310424}</ClientId>
+  <DisplayName>AutoSave</DisplayName>
+  <Description>AutoSave</Description>
+  <Assembly>AutoSave.dll</Assembly>
   <LoadOnStartUp>1</LoadOnStartUp>
   <UserUnloadable>1</UserUnloadable>
   <Hidden>0</Hidden>
