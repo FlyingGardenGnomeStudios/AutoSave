@@ -2,8 +2,8 @@
   <!--Created for Autodesk Inventor Version 21.0-->
   <ClassId>{28c77d41-4c93-4cdd-aabd-3d200d491d8f}</ClassId>
   <ClientId>{28c77d41-4c93-4cdd-aabd-3d200d491d8f}</ClientId>
-  <DisplayName>AutoSave</DisplayName>
-  <Description>AutoSave</Description>
+  <DisplayName>Batch Program</DisplayName>
+  <Description>Batch Program</Description>
   <Assembly>Batch Program.dll</Assembly>
   <LoadOnStartUp>1</LoadOnStartUp>
   <UserUnloadable>1</UserUnloadable>

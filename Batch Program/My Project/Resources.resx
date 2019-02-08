@@ -118,22 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="AutoSave_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AutoSave 16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AutoSave_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AutoSave 32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="autosave_321" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\autosave_32.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Changelog" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Changelog.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="AutoSave_Icon_Perm_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AutoSave Icon Perm 16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AutoSave_Icon_Perm_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AutoSave Icon Perm 32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BatchProgram" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BatchProgram.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
