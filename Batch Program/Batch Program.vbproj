@@ -70,10 +70,10 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <RootNamespace>AutoSave</RootNamespace>
+    <RootNamespace>BatchProgram</RootNamespace>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyName>AutoSave</AssemblyName>
+    <AssemblyName>Batch Program</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AddinNETFramework.AdWebServicesWrapper">
@@ -116,33 +116,16 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Open Version.designer.vb">
-      <DependentUpon>Open Version.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Open Version.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SavePrompt.designer.vb">
-      <DependentUpon>SavePrompt.vb</DependentUpon>
-    </Compile>
-    <Compile Include="SavePrompt.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Settings.designer.vb">
-      <DependentUpon>Settings.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Settings.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="StandardAddInServer.vb" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="AutoSave.X.manifest">
+    <None Include="app.config" />
+    <None Include="Batch Program.X.manifest">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Autodesk.AutoSave.Inventor.addin">
+    <None Include="Autodesk.Batch Program.Inventor.addin">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -176,40 +159,24 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\BatchProgram.png" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Open Version.resx">
-      <DependentUpon>Open Version.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SavePrompt.resx">
-      <DependentUpon>SavePrompt.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Settings.resx">
-      <DependentUpon>Settings.vb</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\AutoSave Icon Perm 16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\AutoSave Icon Perm 32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\AutoSave Icon Perm.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
     <PostBuildEvent>call "%25VS140COMNTOOLS%25vsvars32"
-		mt.exe -manifest "$(ProjectDir)AutoSave.X.manifest" -outputresource:"$(TargetPath)";#2
-		XCopy "$(Targetdir)AutoSave.dll" "%25AppData%25\Autodesk\ApplicationPlugins\$(TargetName)\" /Y /R
+		mt.exe -manifest "$(ProjectDir)Batch Program.X.manifest" -outputresource:"$(TargetPath)";#2
+		XCopy "$(Targetdir)Batch Program.dll" "%25AppData%25\Autodesk\ApplicationPlugins\$(TargetName)\" /Y /R
                            	XCopy "$(Targetdir)RestSharp.dll" "%25AppData%25\Autodesk\ApplicationPlugins\$(TargetName)\" /Y /R
-		XCopy "$(ProjectDir)Autodesk.AutoSave.Inventor.addin" "%25AppData%25\Autodesk\ApplicationPlugins\$(TargetName)\" /Y /R
+		XCopy "$(ProjectDir)Autodesk.Batch Program.Inventor.addin" "%25AppData%25\Autodesk\ApplicationPlugins\$(TargetName)\" /Y /R
 	</PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -2,70 +2,67 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
   <Profiles />
   <Settings>
-    <Setting Name="cmbProj" Type="System.Int32" Scope="User">
+    <Setting Name="cmbProj" Type="System.String" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="cmbInt" Type="System.Int32" Scope="User">
+    <Setting Name="cmbInt" Type="System.String" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="cmbOld" Type="System.Int32" Scope="User">
+    <Setting Name="cmbOld" Type="System.String" Scope="User">
       <Value Profile="(Default)">2</Value>
     </Setting>
-    <Setting Name="SaveVersions" Type="System.Int32" Scope="User">
+    <Setting Name="SaveVersions" Type="System.String" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
-    <Setting Name="SaveOld" Type="System.Int32" Scope="User">
+    <Setting Name="SaveOld" Type="System.String" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="Autosave" Type="System.Boolean" Scope="User">
+    <Setting Name="DocLoc" Type="System.String" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="DocLoc" Type="System.Boolean" Scope="User">
+    <Setting Name="Cleanup" Type="System.String" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="Cleanup" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="KeepVersions" Type="System.Boolean" Scope="User">
+    <Setting Name="KeepVersions" Type="System.String" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="KeepOlderThan" Type="System.Boolean" Scope="User">
+    <Setting Name="KeepOlderThan" Type="System.String" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="KeepEverything" Type="System.Boolean" Scope="User">
+    <Setting Name="KeepEverything" Type="System.String" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="Interval" Type="System.Int32" Scope="User">
+    <Setting Name="Interval" Type="System.String" Scope="User">
       <Value Profile="(Default)">900</Value>
     </Setting>
-    <Setting Name="IntervalType" Type="System.Int32" Scope="User">
+    <Setting Name="IntervalType" Type="System.String" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="OldFiles" Type="System.Int32" Scope="User">
+    <Setting Name="OldFiles" Type="System.String" Scope="User">
       <Value Profile="(Default)">2</Value>
     </Setting>
-    <Setting Name="OldInterval" Type="System.Int32" Scope="User">
+    <Setting Name="OldInterval" Type="System.String" Scope="User">
       <Value Profile="(Default)">86400</Value>
     </Setting>
-    <Setting Name="Projects" Type="System.Int32" Scope="User">
+    <Setting Name="Projects" Type="System.String" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="SaveInterval" Type="System.Int32" Scope="User">
+    <Setting Name="SaveInterval" Type="System.String" Scope="User">
       <Value Profile="(Default)">15</Value>
     </Setting>
     <Setting Name="SaveLocation" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="UseDocumentLocation" Type="System.Boolean" Scope="User">
+    <Setting Name="UseDocumentLocation" Type="System.String" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="CloseLater" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Kill" Type="System.Boolean" Scope="User">
+    <Setting Name="Kill" Type="System.String" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="ReadOnlySave" Type="System.Boolean" Scope="User">
+    <Setting Name="ReadOnlySave" Type="System.String" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
