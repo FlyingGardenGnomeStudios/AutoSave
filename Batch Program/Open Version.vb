@@ -1,5 +1,5 @@
 ﻿Imports System.Windows.Forms
-Imports AutoSave.AutoSave
+Imports BatchProgram.AutoSave
 
 Public Class Open_Version
     Dim Settings As New Settings

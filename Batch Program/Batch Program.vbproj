@@ -70,10 +70,10 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <RootNamespace>AutoSave</RootNamespace>
+    <RootNamespace>BatchProgram</RootNamespace>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyName>AutoSave</AssemblyName>
+    <AssemblyName>Batch Program</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AddinNETFramework.AdWebServicesWrapper">
@@ -137,12 +137,13 @@
     <Compile Include="StandardAddInServer.vb" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="AutoSave.X.manifest">
+    <None Include="app.config" />
+    <None Include="Batch Program.X.manifest">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Autodesk.AutoSave.Inventor.addin">
+    <None Include="Autodesk.Batch Program.Inventor.addin">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -206,10 +207,10 @@
     <PreBuildEvent>
     </PreBuildEvent>
     <PostBuildEvent>call "%25VS140COMNTOOLS%25vsvars32"
-		mt.exe -manifest "$(ProjectDir)AutoSave.X.manifest" -outputresource:"$(TargetPath)";#2
-		XCopy "$(Targetdir)AutoSave.dll" "%25AppData%25\Autodesk\ApplicationPlugins\$(TargetName)\" /Y /R
+		mt.exe -manifest "$(ProjectDir)Batch Program.X.manifest" -outputresource:"$(TargetPath)";#2
+		XCopy "$(Targetdir)Batch Program.dll" "%25AppData%25\Autodesk\ApplicationPlugins\$(TargetName)\" /Y /R
                            	XCopy "$(Targetdir)RestSharp.dll" "%25AppData%25\Autodesk\ApplicationPlugins\$(TargetName)\" /Y /R
-		XCopy "$(ProjectDir)Autodesk.AutoSave.Inventor.addin" "%25AppData%25\Autodesk\ApplicationPlugins\$(TargetName)\" /Y /R
+		XCopy "$(ProjectDir)Autodesk.Batch Program.Inventor.addin" "%25AppData%25\Autodesk\ApplicationPlugins\$(TargetName)\" /Y /R
 	</PostBuildEvent>
   </PropertyGroup>
 </Project>

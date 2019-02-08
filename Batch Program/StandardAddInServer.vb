@@ -12,7 +12,7 @@ Imports RestSharp.Deserializers
 Imports System.Runtime.InteropServices
 Namespace AutoSave
     <ProgIdAttribute("AutoSave.StandardAddInServer"),
-    GuidAttribute("a97cd3d3-b10e-42ce-99c4-07a5a6310424")>
+    GuidAttribute("28c77d41-4c93-4cdd-aabd-3d200d491d8f")>
     Public Class StandardAddInServer
         Implements Inventor.ApplicationAddInServer
         Dim WithEvents m_UIEvents2 As UserInputEvents
@@ -37,12 +37,6 @@ Namespace AutoSave
         ' the first time. However, with the introduction of the ribbon this argument is always true.
         Public Sub Activate(ByVal addInSiteObject As Inventor.ApplicationAddInSite, ByVal firstTime As Boolean) Implements Inventor.ApplicationAddInServer.Activate
             ' Initialize AddIn members.
-            If IsFile(IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData), "Autodesk\ApplicationPlugins"), "AutoSave-Standalone.dll") = True Then
-                MsgBox("It appears as though the perpetual version of Autosave is installed" & vbNewLine &
-                       "In order to stop save conflicts, please uninstal one of the AutoSave versions." & vbNewLine &
-                       "The subscription version will not be loaded.")
-                Exit Sub
-            End If
             g_inventorApplication = addInSiteObject.Application
             ' Connect to the user-interface events to handle a ribbon reset.
             m_uiEvents = g_inventorApplication.UserInterfaceManager.UserInterfaceEvents
@@ -51,7 +45,7 @@ Namespace AutoSave
             Dim smallIcon As stdole.IPictureDisp = PictureDispConverter.ToIPictureDisp(My.Resources.AutoSave_16)
             Dim controlDefs As Inventor.ControlDefinitions = g_inventorApplication.CommandManager.ControlDefinitions
             ' ActivationCheck()
-            m_AutoSaveButton = controlDefs.AddButtonDefinition("Settings", "UIAutoSave", CommandTypesEnum.kShapeEditCmdType, AddInClientID,, "Change options for AutoSave", smallIcon, largeIcon, ButtonDisplayEnum.kDisplayTextInLearningMode)
+            m_AutoSaveButton = controlDefs.AddButtonDefinition("Batch Program", "UIAutoSave", CommandTypesEnum.kShapeEditCmdType, AddInClientID,, "Change options for AutoSave", smallIcon, largeIcon, ButtonDisplayEnum.kDisplayTextInLearningMode)
             m_AppEvents = g_inventorApplication.ApplicationEvents
             ' Add to the user interface, if it's the first time.
             If firstTime Then

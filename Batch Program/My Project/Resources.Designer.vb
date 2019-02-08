@@ -39,7 +39,7 @@ Namespace My.Resources
         Friend ReadOnly Property ResourceManager() As Global.System.Resources.ResourceManager
             Get
                 If Object.ReferenceEquals(resourceMan, Nothing) Then
-                    Dim temp As Global.System.Resources.ResourceManager = New Global.System.Resources.ResourceManager("AutoSave.Resources", GetType(Resources).Assembly)
+                    Dim temp As Global.System.Resources.ResourceManager = New Global.System.Resources.ResourceManager("BatchProgram.Resources", GetType(Resources).Assembly)
                     resourceMan = temp
                 End If
                 Return resourceMan
@@ -111,15 +111,17 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Version 1.6.1
+        '''  Looks up a localized string similar to Version 1.6.2
+        '''	Added retry process for failed save
+        '''	Minor debugging
+        '''Version 1.6.1
         '''	Added intermediate dirty flag to insulate the standard flag from improper overwrites
         '''	Moved writing of save data to non-active document (previous method may have caused crashes)
         '''	Added extra check to confirm idle state before initiating autosave 
         '''Version 1.6
         '''	Corrected subscription issues - instituted 15 day grace period
         '''Version 1.5.2
-        '''	Forced update of &quot;Part Name&quot; iProperty after autosave. Some people were having the autosave part number display on their active drawing.
-        '''	Added log res [rest of string was truncated]&quot;;.
+        '''	Forced update of &quot;Part Name&quot; iProperty after autosave. Some people were having th [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property Changelog() As String
             Get
