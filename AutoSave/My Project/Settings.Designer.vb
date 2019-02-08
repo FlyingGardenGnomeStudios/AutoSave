@@ -57,9 +57,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
-        Public Property cmbProj() As String
+        Public Property cmbProj() As Integer
             Get
-                Return CType(Me("cmbProj"),String)
+                Return CType(Me("cmbProj"),Integer)
             End Get
             Set
                 Me("cmbProj") = value
@@ -69,9 +69,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
-        Public Property cmbInt() As String
+        Public Property cmbInt() As Integer
             Get
-                Return CType(Me("cmbInt"),String)
+                Return CType(Me("cmbInt"),Integer)
             End Get
             Set
                 Me("cmbInt") = value
@@ -81,9 +81,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("2")>  _
-        Public Property cmbOld() As String
+        Public Property cmbOld() As Integer
             Get
-                Return CType(Me("cmbOld"),String)
+                Return CType(Me("cmbOld"),Integer)
             End Get
             Set
                 Me("cmbOld") = value
@@ -93,9 +93,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
-        Public Property SaveVersions() As String
+        Public Property SaveVersions() As Integer
             Get
-                Return CType(Me("SaveVersions"),String)
+                Return CType(Me("SaveVersions"),Integer)
             End Get
             Set
                 Me("SaveVersions") = value
@@ -105,9 +105,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("1")>  _
-        Public Property SaveOld() As String
+        Public Property SaveOld() As Integer
             Get
-                Return CType(Me("SaveOld"),String)
+                Return CType(Me("SaveOld"),Integer)
             End Get
             Set
                 Me("SaveOld") = value
@@ -117,9 +117,21 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property DocLoc() As String
+        Public Property Autosave() As Boolean
             Get
-                Return CType(Me("DocLoc"),String)
+                Return CType(Me("Autosave"),Boolean)
+            End Get
+            Set
+                Me("Autosave") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property DocLoc() As Boolean
+            Get
+                Return CType(Me("DocLoc"),Boolean)
             End Get
             Set
                 Me("DocLoc") = value
@@ -129,9 +141,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property Cleanup() As String
+        Public Property Cleanup() As Boolean
             Get
-                Return CType(Me("Cleanup"),String)
+                Return CType(Me("Cleanup"),Boolean)
             End Get
             Set
                 Me("Cleanup") = value
@@ -141,9 +153,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-        Public Property KeepVersions() As String
+        Public Property KeepVersions() As Boolean
             Get
-                Return CType(Me("KeepVersions"),String)
+                Return CType(Me("KeepVersions"),Boolean)
             End Get
             Set
                 Me("KeepVersions") = value
@@ -153,9 +165,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property KeepOlderThan() As String
+        Public Property KeepOlderThan() As Boolean
             Get
-                Return CType(Me("KeepOlderThan"),String)
+                Return CType(Me("KeepOlderThan"),Boolean)
             End Get
             Set
                 Me("KeepOlderThan") = value
@@ -165,9 +177,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property KeepEverything() As String
+        Public Property KeepEverything() As Boolean
             Get
-                Return CType(Me("KeepEverything"),String)
+                Return CType(Me("KeepEverything"),Boolean)
             End Get
             Set
                 Me("KeepEverything") = value
@@ -177,9 +189,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("900")>  _
-        Public Property Interval() As String
+        Public Property Interval() As Integer
             Get
-                Return CType(Me("Interval"),String)
+                Return CType(Me("Interval"),Integer)
             End Get
             Set
                 Me("Interval") = value
@@ -189,9 +201,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
-        Public Property IntervalType() As String
+        Public Property IntervalType() As Integer
             Get
-                Return CType(Me("IntervalType"),String)
+                Return CType(Me("IntervalType"),Integer)
             End Get
             Set
                 Me("IntervalType") = value
@@ -201,9 +213,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("2")>  _
-        Public Property OldFiles() As String
+        Public Property OldFiles() As Integer
             Get
-                Return CType(Me("OldFiles"),String)
+                Return CType(Me("OldFiles"),Integer)
             End Get
             Set
                 Me("OldFiles") = value
@@ -213,9 +225,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("86400")>  _
-        Public Property OldInterval() As String
+        Public Property OldInterval() As Integer
             Get
-                Return CType(Me("OldInterval"),String)
+                Return CType(Me("OldInterval"),Integer)
             End Get
             Set
                 Me("OldInterval") = value
@@ -225,9 +237,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("1")>  _
-        Public Property Projects() As String
+        Public Property Projects() As Integer
             Get
-                Return CType(Me("Projects"),String)
+                Return CType(Me("Projects"),Integer)
             End Get
             Set
                 Me("Projects") = value
@@ -237,9 +249,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("15")>  _
-        Public Property SaveInterval() As String
+        Public Property SaveInterval() As Integer
             Get
-                Return CType(Me("SaveInterval"),String)
+                Return CType(Me("SaveInterval"),Integer)
             End Get
             Set
                 Me("SaveInterval") = value
@@ -261,9 +273,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property UseDocumentLocation() As String
+        Public Property UseDocumentLocation() As Boolean
             Get
-                Return CType(Me("UseDocumentLocation"),String)
+                Return CType(Me("UseDocumentLocation"),Boolean)
             End Get
             Set
                 Me("UseDocumentLocation") = value
@@ -285,9 +297,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property Kill() As String
+        Public Property Kill() As Boolean
             Get
-                Return CType(Me("Kill"),String)
+                Return CType(Me("Kill"),Boolean)
             End Get
             Set
                 Me("Kill") = value
@@ -297,9 +309,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property ReadOnlySave() As String
+        Public Property ReadOnlySave() As Boolean
             Get
-                Return CType(Me("ReadOnlySave"),String)
+                Return CType(Me("ReadOnlySave"),Boolean)
             End Get
             Set
                 Me("ReadOnlySave") = value
@@ -316,9 +328,9 @@ Namespace My
     Friend Module MySettingsProperty
         
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.BatchProgram.My.MySettings
+        Friend ReadOnly Property Settings() As Global.AutoSave.My.MySettings
             Get
-                Return Global.BatchProgram.My.MySettings.Default
+                Return Global.AutoSave.My.MySettings.Default
             End Get
         End Property
     End Module
