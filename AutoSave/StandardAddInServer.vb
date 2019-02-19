@@ -30,7 +30,6 @@ Namespace AutoSave
         Dim Fail As Boolean = True
         Dim LicenseError As String = ""
 
-
 #Region "ApplicationAddInServer Members"
         ' This method is called by Inventor when it loads the AddIn. The AddInSiteObject provides access  
         ' to the Inventor Application object. The FirstTime flag indicates if the AddIn is loaded for
@@ -39,9 +38,8 @@ Namespace AutoSave
             ' Initialize AddIn members.
             If IsFile(IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData), "Autodesk\ApplicationPlugins"), "AutoSave-Standalone.dll") = True Then
                 MsgBox("It appears as though the perpetual version of Autosave is installed" & vbNewLine &
-                       "In order to stop save conflicts, please uninstal one of the AutoSave versions." & vbNewLine &
-                       "The subscription version will not be loaded.")
-                Exit Sub
+                       "In order to stop save conflicts, please uninstal one of the AutoSave versions and re-install the desired version")
+                'Exit Sub
             End If
             g_inventorApplication = addInSiteObject.Application
             ' Connect to the user-interface events to handle a ribbon reset.

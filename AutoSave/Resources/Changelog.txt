@@ -1,4 +1,6 @@
-﻿Version 1.6.2
+﻿Version 1.6.3
+	
+Version 1.6.2
 	Added retry process for failed save
 	Minor debugging
 Version 1.6.1
